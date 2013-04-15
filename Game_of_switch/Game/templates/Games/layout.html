@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    {% if style %}
+    <link type="text/css" rel="stylesheet" href="../../static/css/{{ style }}.css">
+    {% endif %}
+
+    {% if js %}
+    <script src="../../static/javascript/{{ js }}.js"></script>
+    {% endif %}
+</head>
+<body>
+{% block content %}
+
+{% endblock %}
+</body>
+</html>

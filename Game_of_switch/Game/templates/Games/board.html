@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    </script>
+    <title>Game Board</title>
+    <script>
+        var img = new Image();
+        img.onerror = function(){alert("error");};
+        img.src = "/static/images/cardSheet.png";
+        function displayCard(varx, vary, varcard)
+        {
+            var cWidth=168;
+            var cHeight=243;
+            var srcx = varcard%13 * cWidth;
+            var srcy;
+            if (varcard < 13)
+            {
+                srcy = 0;
+            }
+            else if (varcard <26)
+            {
+                srcy = cHeight;
+            }
+            else if (varcard < 39)
+            {
+                srcy = cHeight*2;
+            }
+            else if (varcard < 52)
+            {
+                srcy = cHeight*3;
+            }
+            else
+            {
+                srcy = cHeight*4;
+            }
+            cntx.drawImage(img,srcx,srcy,cWidth,cHeight,varx+5,vary+5,cardWidth-5,cardHeight-5);
+        }
+    </script>
+</head>
+<body>
+    <h1>Game Board</h1>
+    <table>
+    <tr><td>
+    <a href="/board"> Load Board </a>
+    </tr></td>
+    <tr><td>
+    <canvas id="board" width="400" height="600"></canvas>
+    </tr></td>
+    </table>
+    <script>
+        var c = document.getElementById("board");
+        var cntx = c.getContext("2d");
+        cntx.fillStyle = "#E0E0E0";
+        cntx.fillRect(0, 0, 400, 600);
+        var cardWidth = 66;
+        var cardHeight = cardWidth*1.5;
+        cntx.font = "10px Arial";
+        var i = 0;
+        var j = 0;
+        {% for row in board %}
+            {% for card in row %}
+
+                displayCard(cardWidth*i, cardHeight*j, {{ card }});
+                i = i+1;
+            {% endfor %}
+            i = 0;
+            j = j+1;
+        {% endfor %}
+
+        $("#board").click(function(e){
+
+            var x = Math.floor((e.pageX-$("#board").offset().left)/cardWidth);
+            var y = Math.floor((e.pageY-$("#board").offset().top)/cardHeight);
+            cntx.drawImage(img,336,4*243,168,243,x*cardWidth+5,y*cardHeight+5,cardWidth-5,cardHeight-5);
+        });
+    </script>
+
+</body>
+</html>

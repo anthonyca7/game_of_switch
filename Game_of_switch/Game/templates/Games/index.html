@@ -1,0 +1,30 @@
+{% extends "Games/layout.html" %}
+
+{% block content %}
+    <header>
+        <div class="table">
+
+        <div class="tablerow">
+
+        <div class="tablecell">
+        <img src="../../static/images/index_header_logo.png" width="300px" height="120px">
+        </div>
+
+        <div class="tc5">
+        <a href="">Rules</a>
+        <a href="/board">Play</a>
+        <a href="">Leaderboard</a>
+        </div>
+
+        </div>
+        </div>
+    </header>
+
+    <div class="mainContent">
+        <a href="/login"><button value="login" id="top_button">Login</button><br></a>
+        <span class="label">OR</span><br>
+        <a href="/register"><button value="Register" id="bb">Register</button></a><br>
+    </div>
+
+
+{% endblock %}
